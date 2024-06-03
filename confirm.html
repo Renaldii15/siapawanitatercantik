@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetAlert Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script>
+        Swal.fire({
+            title: 'Hai',
+            showCancelButton: true,
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let Nama;
+                const askName = () => {
+                    Swal.fire({
+                        title: 'Ketik nama wanita tercantik',
+                        input: 'text',
+                        inputPlaceholder: 'Masukkan nama',
+                        showCancelButton: false,
+                        confirmButtonText: 'Submit'
+                    }).then((nameResult) => {
+                        Nama = nameResult.value;
+                        if (Nama.toLowerCase() !== "azkiya puteri faylasufa" && Nama.toLowerCase() !== "azkiya") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'SALAH!!',
+                                text: `${Nama} bukan wanita tercantik`
+                            }).then(() => {
+                                askName();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: `Yaap betul, ${Nama} adalah wanita tercantik`,
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                Swal.fire('Created by Renaldi');
+                            });
+                        }
+                    });
+                };
+                askName();
+            } else {
+                Swal.fire('Ok');
+            }
+        });
+    </script>
+</body>
+</html>
